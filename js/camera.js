@@ -1,29 +1,27 @@
 // camera.js
 
-import QrScanner from './js/qr-scanner.js';  // ここを正しく！
+// QRスキャン後の流れ管理
+function handleQRScan(qrData) {
+    console.log('QRスキャン成功:', qrData);
 
-const videoElem = document.getElementById('camera');
-const nextButton = document.getElementById('next-button');
+    // 次へ進むボタンを表示
+    const nextButton = document.getElementById('next-button');
+    if (nextButton) {
+        nextButton.classList.remove('hidden');
+    }
+}
 
-// ボタンは最初隠す
-nextButton.classList.add('hidden');
+// ページロード時に初期化
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('カメラ初期化開始');
 
-// カメラ＆スキャナ準備
-QrScanner.hasCamera().then(hasCamera => {
-  if (hasCamera) {
-    const qrScanner = new QrScanner(
-      videoElem,
-      result => {
-        console.log('QRコード読み取り成功:', result.data || result); // バージョンによる違い
-        nextButton.classList.remove('hidden'); // 成功したらボタン出す
-        qrScanner.stop(); // 読み取れたらスキャナ停止（無限にスキャンしない）
-      },
-      {
-        preferredCamera: 'environment' // 背面カメラ優先（スマホ/iPad対応）
-      }
-    );
-    qrScanner.start();
-  } else {
-    alert('カメラが見つかりませんでした');
-  }
+    // ステータスエリアがなければ作成
+    if (!document.getElementById('status')) {
+        const statusElem = document.createElement('div');
+        statusElem.id = 'status';
+        document.body.appendChild(statusElem);
+    }
+
+    // QRスキャナー初期化を呼び出し
+    initQRScanner(handleQRScan);
 });
