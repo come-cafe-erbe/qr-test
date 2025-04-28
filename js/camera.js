@@ -1,22 +1,17 @@
-// camera.js
-
 document.addEventListener('DOMContentLoaded', () => {
   console.log('カメラ初期化開始');
 
   const html5QrCode = new Html5Qrcode("qr-reader");
+  const nextButton = document.getElementById('next-button');
+
+  nextButton.addEventListener('click', () => {
+    console.log('次へ進むボタンが押された！');
+    window.location.href = 'tray.html';
+  });
 
   function onScanSuccess(decodedText, decodedResult) {
     console.log(`QRスキャン成功: ${decodedText}`);
-
-    const nextButton = document.getElementById('next-button');
-    if (nextButton) {
-      nextButton.classList.remove('hidden');
-
-      // ★ここで「次へ進む」ボタンを押したらtray.htmlに遷移
-      nextButton.addEventListener('click', () => {
-        window.location.href = 'tray.html';
-      });
-    }
+    nextButton.classList.remove('hidden'); // QR読み取り後にボタンを出す
 
     html5QrCode.stop().then(() => {
       console.log("QRコード読み取り終了");
@@ -26,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function onScanError(errorMessage) {
-    // スキャン失敗しても気にしない
+    // スキャン失敗しても無視
   }
 
   html5QrCode.start(
