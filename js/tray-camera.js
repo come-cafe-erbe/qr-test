@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const videoElem = document.getElementById('tray-camera');
   const captureButton = document.getElementById('capture-button');
   const previewImage = document.getElementById('preview-image');
+  const previewModal = document.getElementById('preview-modal');
 
   let stream;
 
@@ -35,9 +36,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       const imageDataUrl = canvas.toDataURL('image/png');
 
-      // ★ここ！window.open()は絶対使わない！
+      // 撮影画像をモーダルに表示
       previewImage.src = imageDataUrl;
-      previewImage.style.display = 'block';
+      previewModal.style.display = 'flex';
+
+      // 3秒後に次のページに自動遷移
+      setTimeout(() => {
+        window.location.href = 'confirm.html'; // ←遷移先（仮）
+      }, 3000);
 
     } catch (err) {
       console.error('撮影エラー:', err);
@@ -45,3 +51,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 });
+
