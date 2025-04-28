@@ -36,13 +36,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       const imageDataUrl = canvas.toDataURL('image/png');
 
-      // 撮影画像をモーダルに表示
+      // ★モーダルに撮影画像を表示！
       previewImage.src = imageDataUrl;
       previewModal.style.display = 'flex';
 
-      // 3秒後に次のページに自動遷移
+      // ★3秒後に次のページへ！
       setTimeout(() => {
-        window.location.href = 'confirm.html'; // ←遷移先（仮）
+        window.location.href = 'confirm.html'; // 仮
       }, 3000);
 
     } catch (err) {
@@ -51,4 +51,3 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 });
-
