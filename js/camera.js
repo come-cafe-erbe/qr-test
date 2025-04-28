@@ -11,6 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextButton = document.getElementById('next-button');
     if (nextButton) {
       nextButton.classList.remove('hidden');
+
+      // ★ここで「次へ進む」ボタンを押したらtray.htmlに遷移
+      nextButton.addEventListener('click', () => {
+        window.location.href = 'tray.html';
+      });
     }
 
     html5QrCode.stop().then(() => {
