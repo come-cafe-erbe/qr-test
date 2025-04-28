@@ -1,6 +1,8 @@
 // confirm.js
 
 document.addEventListener('DOMContentLoaded', async () => {
+  console.log('Confirm画面ロード → Slack送信開始');
+
   const capturedImage = localStorage.getItem('capturedImage');
   if (!capturedImage) {
     console.error('撮影画像が見つかりません');
@@ -8,19 +10,19 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   try {
-    await fetch('プロキシURL', {
+    await fetch('あなたのプロキシURL', { // ←ここを必ずプロキシURLに
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         image: capturedImage,
-        channel: 'チャンネルID', // 必要なら
+        channel: 'あなたのチャンネルID' // 必要なら
       })
     });
 
     console.log('Slack送信成功！');
-    // 送信後、localStorage消しておく
+    // 成功したら一時データ削除
     localStorage.removeItem('capturedImage');
 
   } catch (error) {
