@@ -1,9 +1,11 @@
+// tray-camera.js
+
 document.addEventListener('DOMContentLoaded', async () => {
   console.log('トレイ撮影用カメラ起動開始');
 
   const videoElem = document.getElementById('tray-camera');
   const captureButton = document.getElementById('capture-button');
-  const previewImage = document.getElementById('preview-image'); // 追加！
+  const previewImage = document.getElementById('preview-image');
 
   let stream;
 
@@ -33,7 +35,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       const imageDataUrl = canvas.toDataURL('image/png');
 
-      // ★ここを window.open()ではなく、ページ内に表示！
+      // ★ここ！window.open()は絶対使わない！
       previewImage.src = imageDataUrl;
       previewImage.style.display = 'block';
 
@@ -43,4 +45,3 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 });
-
