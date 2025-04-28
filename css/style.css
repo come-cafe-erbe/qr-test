@@ -89,3 +89,16 @@ body {
 .status-message.error {
   color: #D98282; /* エラーメッセージはやさしい赤 */
 }
+
+.tray-guide {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+  border: 2px solid #A8C3A0; /* ナチュラルグリーン */
+  border-radius: 12px;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
