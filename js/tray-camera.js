@@ -1,16 +1,15 @@
-// tray-camera.js
-
 document.addEventListener('DOMContentLoaded', async () => {
   console.log('トレイ撮影用カメラ起動開始');
 
   const videoElem = document.getElementById('tray-camera');
   const captureButton = document.getElementById('capture-button');
+  const previewImage = document.getElementById('preview-image'); // 追加！
 
   let stream;
 
   try {
     stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: "environment" }, // 背面カメラ
+      video: { facingMode: "environment" },
       audio: false
     });
 
@@ -34,9 +33,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       const imageDataUrl = canvas.toDataURL('image/png');
 
-      // デモ用：撮った写真を別ウィンドウでプレビュー表示
-      const previewWindow = window.open();
-      previewWindow.document.write(`<img src="${imageDataUrl}" style="width:100%;">`);
+      // ★ここを window.open()ではなく、ページ内に表示！
+      previewImage.src = imageDataUrl;
+      previewImage.style.display = 'block';
 
     } catch (err) {
       console.error('撮影エラー:', err);
@@ -44,3 +43,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 });
+
