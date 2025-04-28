@@ -11,14 +11,14 @@
     <h1 class="title">QRコードを読み取ってください</h1>
 
     <div class="camera-area">
-      <video id="camera" autoplay playsinline></video>
+      <!-- ★ここを修正 -->
+      <div id="qr-reader" style="width: 100%; height: 100%;"></div>
       <div class="qr-guide"></div>
     </div>
 
     <button id="next-button" class="button hidden">次へ進む</button>
   </div>
 
-  <!-- ★ライブラリ読み込み順を正しく！ -->
   <script src="https://unpkg.com/html5-qrcode@2.3.7/html5-qrcode.min.js"></script>
   <script src="js/qr-scanner.js"></script>
   <script type="module" src="js/camera.js"></script>
