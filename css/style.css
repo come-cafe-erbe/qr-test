@@ -26,8 +26,8 @@ body {
 .camera-area {
   position: relative;
   width: 100%;
-  padding-top: 75%; /* 4:3 カメラ比率 */
-  background-color: #D6C7AE; /* サンドベージュで背景 */
+  height: 60vh; /* 画面の60%高さを占める */
+  background-color: #D6C7AE;
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 20px;
