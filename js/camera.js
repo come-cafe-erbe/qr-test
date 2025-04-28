@@ -1,28 +1,25 @@
 // camera.js
 
-// QRスキャナーライブラリを読み込む（CDNでも、ローカルファイルでもOK）
-import QrScanner from './js/qr-scanner.min.js'; // もしくはパスを適宜修正
+import QrScanner from './js/qr-scanner.js';  // ここを正しく！
 
-// HTML要素取得
 const videoElem = document.getElementById('camera');
 const nextButton = document.getElementById('next-button');
 
-// 最初はボタンを非表示にしておく
+// ボタンは最初隠す
 nextButton.classList.add('hidden');
 
-// カメラ起動＋QR読み取り開始
+// カメラ＆スキャナ準備
 QrScanner.hasCamera().then(hasCamera => {
   if (hasCamera) {
     const qrScanner = new QrScanner(
       videoElem,
       result => {
-        console.log('QRコード読み取り成功:', result);
-        // QRコードを読み取ったらボタン表示
-        nextButton.classList.remove('hidden');
-        qrScanner.stop(); // もうスキャンしなくてOKなら止める
+        console.log('QRコード読み取り成功:', result.data || result); // バージョンによる違い
+        nextButton.classList.remove('hidden'); // 成功したらボタン出す
+        qrScanner.stop(); // 読み取れたらスキャナ停止（無限にスキャンしない）
       },
       {
-        preferredCamera: 'environment' // スマホやiPadなら背面カメラ優先
+        preferredCamera: 'environment' // 背面カメラ優先（スマホ/iPad対応）
       }
     );
     qrScanner.start();
